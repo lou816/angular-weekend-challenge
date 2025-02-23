@@ -1,0 +1,24 @@
+<h1>Step 2: Select your config and options</h1>
+Config:
+<select #carOptions (change)="selectConfig(carOptions.value)">
+  @for (config of service.currentCarOptions()?.configs; track $index) {
+    <option [value]="config.id">{{ config.description }}</option>
+  }
+</select>
+@if (service.currentCarOptions()) {
+  <div>
+    Range: {{service.currentConfig()?.range}} miles
+    - Max speed: {{service.currentConfig()?.speed}} mph
+    - Cost: ${{service.currentConfig()?.price}}
+  </div>
+  
+  <div>
+    @if (service.currentCarOptions()?.towHitch) {
+      Tow hitch? <input type="checkbox" />
+    }
+    <br/>
+    @if (service.currentCarOptions()?.yoke) {
+      Yoke steering wheel? <input type="checkbox" />
+    }
+  </div>
+}
